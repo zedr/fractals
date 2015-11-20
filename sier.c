@@ -20,7 +20,7 @@ void plot_point(struct point *p)
 	gfx_point(p->x, p->y);
 }
 
-void paint_fractal()
+void paint_fractal(x1, y1, x2, y2, x3, y3)
 {
 	FILE *fp = fopen("/dev/urandom", "rb");
 	struct point *triangle[3];
@@ -28,16 +28,16 @@ void paint_fractal()
 	int px, py;
 
 	triangle[0] = malloc(sizeof *triangle);
-	triangle[0]->x = 320;
-	triangle[0]->y = 10;
+	triangle[0]->x = x1;
+	triangle[0]->y = y1;
 
 	triangle[1] = malloc(sizeof *triangle);
-	triangle[1]->x = 50;
-	triangle[1]->y = 190;
+	triangle[1]->x = x2;
+	triangle[1]->y = y2;
 
 	triangle[2] = malloc(sizeof *triangle);
-	triangle[2]->x = 590;
-	triangle[2]->y = 190;
+	triangle[2]->x = x3;
+	triangle[2]->y = y3;
 
 	plot_point(triangle[0]);
 	plot_point(triangle[1]);
@@ -63,10 +63,20 @@ void paint_fractal()
 
 void create_picture(int width, int height)
 {
+	int x1, y1, x2, y2, x3, y3;
+
+	x1 = width / 2;
+	y1 = 0;
+	x2 = 0;
+	y2 = height;
+	x3 = width;
+	y3 = height;
+
 	// Open a new window for drawing.
 	gfx_open(width, height, TITLE);
 	gfx_color(0,200,100);
-	paint_fractal();
+
+	paint_fractal(x1, y1, x2, y2, x3, y3);
 }
 
 int main(int argc, const char *argv[])
