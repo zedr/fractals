@@ -5,47 +5,58 @@
 
 #define TITLE "Sierpinski"
 
+struct point {
+	int x;
+	int y;
+};
 
 int randint(int max, FILE *generator)
 {
 	return fgetc(generator) % max;
 }
 
-void plot_point(int pair[])
+void plot_point(struct point *p)
 {
-	gfx_point(pair[0], pair[1]);
+	gfx_point(p->x, p->y);
 }
 
 void paint_fractal()
 {
-	int tri[3][2];
-	int px, py;
-	int *vertex;
 	FILE *fp = fopen("/dev/urandom", "rb");
+	struct point *triangle[3];
+	struct point *vertex;
+	int px, py;
 
-	tri[0][0] = 320;
-	tri[0][1] = 10;
+	triangle[0] = malloc(sizeof *triangle);
+	triangle[0]->x = 320;
+	triangle[0]->y = 10;
 
-	tri[1][0] = 50;
-	tri[1][1] = 190;
+	triangle[1] = malloc(sizeof *triangle);
+	triangle[1]->x = 50;
+	triangle[1]->y = 190;
 
-	tri[2][0] = 590;
-	tri[2][1] = 190;
+	triangle[2] = malloc(sizeof *triangle);
+	triangle[2]->x = 590;
+	triangle[2]->y = 190;
 
-	plot_point(tri[0]);
-	plot_point(tri[1]);
-	plot_point(tri[2]);
+	plot_point(triangle[0]);
+	plot_point(triangle[1]);
+	plot_point(triangle[2]);
 
-	vertex = tri[randint(3, fp)];
-	px = vertex[0];
-	py = vertex[1];
+	vertex = triangle[randint(3, fp)];
+	px = vertex->x;
+	py = vertex->y;
 
 	while(1) {
-		vertex = tri[randint(3, fp)];
-		px = px + (vertex[0] - px) / 2;
-		py = py + (vertex[1] - py) / 2;
+		vertex = triangle[randint(3, fp)];
+		px = px + (vertex->x - px) / 2;
+		py = py + (vertex->y - py) / 2;
 		gfx_point(px, py);
 	}
+
+	free(triangle[0]);
+	free(triangle[1]);
+	free(triangle[2]);
 
 	fclose(fp);
 }
