@@ -83,7 +83,6 @@ void create_picture(int width, int height)
 	x3 = width;
 	y3 = height;
 
-	// Open a new window for drawing.
 	gfx_open(width, height, TITLE);
 	gfx_color(0,200,100);
 
@@ -92,8 +91,10 @@ void create_picture(int width, int height)
 
 int main(int argc, const char *argv[])
 {
-	unsigned int width = 1024;
-	unsigned int height = 1024;
+	unsigned int width, height;
+
+	width = 1024;
+	height = 1024;
 
 	if (argc > 1)
 		width = atoi(argv[1]);
