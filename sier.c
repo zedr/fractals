@@ -26,7 +26,7 @@ void plot_point(struct point *p)
 void handle_sigint(int sig)
 {
 	EXIT_REQUESTED = 1;
-	fprintf(stderr, "Exiting...\n");
+	fprintf(stderr, "\nExiting...\n");
 }
 
 void paint_fractal(x1, y1, x2, y2, x3, y3)
@@ -95,6 +95,21 @@ int main(int argc, const char *argv[])
 	unsigned int width = 1024;
 	unsigned int height = 1024;
 
-	create_picture(width, height);
+	if (argc > 1)
+		width = atoi(argv[1]);
+	if (argc == 3)
+		height = atoi(argv[2]);
+
+
+	if ((width > 0) && (height > 0)) {
+		fprintf(stdout,"Creating %dx%d Sierpinski triangle...\n",
+				width,
+				height);
+		create_picture(width, height);
+	} else
+		fprintf(stderr, "Cannot create a %dx%d triangle.\n",
+				width,
+				height);
+
 	return 0;
 }
