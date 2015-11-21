@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <signal.h>
 #include <stdlib.h>
 #include <time.h>
 #include "gfx/gfx.h"
 
 #define TITLE "Sierpinski"
+
+volatile int EXIT_REQUESTED = 0;
 
 struct point {
 	int x;
@@ -18,6 +21,12 @@ int randint(int max, FILE *generator)
 void plot_point(struct point *p)
 {
 	gfx_point(p->x, p->y);
+}
+
+void handle_sigint(int sig)
+{
+	EXIT_REQUESTED = 1;
+	fprintf(stderr, "Exiting...\n");
 }
 
 void paint_fractal(x1, y1, x2, y2, x3, y3)
@@ -47,7 +56,9 @@ void paint_fractal(x1, y1, x2, y2, x3, y3)
 	px = vertex->x;
 	py = vertex->y;
 
-	while(1) {
+	signal(SIGINT, handle_sigint);
+
+	while(!EXIT_REQUESTED) {
 		vertex = triangle[randint(3, fp)];
 		px = px + (vertex->x - px) / 2;
 		py = py + (vertex->y - py) / 2;
@@ -81,8 +92,8 @@ void create_picture(int width, int height)
 
 int main(int argc, const char *argv[])
 {
-	unsigned int width = 640;
-	unsigned int height = 256;
+	unsigned int width = 1024;
+	unsigned int height = 1024;
 
 	create_picture(width, height);
 	return 0;
