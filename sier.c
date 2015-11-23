@@ -5,6 +5,8 @@
 #include "gfx/gfx.h"
 
 #define TITLE "Sierpinski"
+#define DEFAULT_WIDTH 800
+#define DEFAULT_HEIGHT 800
 
 volatile int EXIT_REQUESTED = 0;
 
@@ -93,8 +95,8 @@ int main(int argc, const char *argv[])
 {
 	unsigned int width, height;
 
-	width = 1024;
-	height = 1024;
+	width = DEFAULT_WIDTH;
+	height = DEFAULT_HEIGHT;
 
 	if (argc > 1)
 		width = atoi(argv[1]);
