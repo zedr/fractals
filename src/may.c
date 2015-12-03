@@ -49,7 +49,7 @@ void compute(float p1)
 			inc = -inc;
 		k += inc;
 
-		printf("k = %f\n", k);
+		fprintf(stderr, "k = %f\n", k);
 		gfx_clear();
 	}
 	sleep(1);
