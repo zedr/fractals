@@ -191,7 +191,7 @@ void gfx_sleep(long nsec)
 
 	t1.tv_sec = 0;
 	t1.tv_nsec = nsec;
-	nanosleep(&t1 , &t2);
+	nanosleep(&t1, &t2);
 }
 
 /* Return the X and Y coordinates of the last event. */
