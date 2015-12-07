@@ -10,6 +10,7 @@ Version 2, 9/23/2011 - Fixes a bug that could result in jerky animation.
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "gfx.h"
 
@@ -180,6 +181,17 @@ char gfx_wait()
 			return event.xbutton.button;
 		}
 	}
+}
+
+void gfx_sleep()
+{
+	struct timespec t1, t2;
+
+	gfx_flush();
+
+	t1.tv_sec = 0;
+	t1.tv_nsec = 50000000L;
+	nanosleep(&t1 , &t2);
 }
 
 /* Return the X and Y coordinates of the last event. */

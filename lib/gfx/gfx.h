@@ -31,6 +31,9 @@ void gfx_clear_color( int red, int green, int blue );
 /* Wait for the user to press a key or mouse button. */
 char gfx_wait();
 
+/* Wait a certain amount of time */
+void gfx_sleep();
+
 /* Return the X and Y coordinates of the last event. */
 int gfx_xpos();
 int gfx_ypos();

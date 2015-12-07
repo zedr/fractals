@@ -43,13 +43,12 @@ void compute(float p1)
 			y = y2;
 		}
 
-		gfx_wait();
+		gfx_sleep();
 
 		if (k > 4.0 || k < 0.0)
 			inc = -inc;
 		k += inc;
 
-		fprintf(stderr, "k = %f\n", k);
 		gfx_clear();
 	}
 	sleep(1);
