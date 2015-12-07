@@ -183,14 +183,14 @@ char gfx_wait()
 	}
 }
 
-void gfx_sleep()
+void gfx_sleep(long nsec)
 {
 	struct timespec t1, t2;
 
 	gfx_flush();
 
 	t1.tv_sec = 0;
-	t1.tv_nsec = 50000000L;
+	t1.tv_nsec = nsec;
 	nanosleep(&t1 , &t2);
 }
 

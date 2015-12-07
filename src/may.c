@@ -43,7 +43,7 @@ void compute(float p1)
 			y = y2;
 		}
 
-		gfx_sleep();
+		gfx_sleep(50000000L);
 
 		if (k > 4.0 || k < 0.0)
 			inc = -inc;

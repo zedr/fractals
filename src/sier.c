@@ -65,6 +65,7 @@ void paint_fractal(x1, y1, x2, y2, x3, y3)
 		px = px + (vertex->x - px) / 2;
 		py = py + (vertex->y - py) / 2;
 		gfx_point(px, py);
+		gfx_sleep(50000L);
 	}
 
 	free(triangle[0]);
