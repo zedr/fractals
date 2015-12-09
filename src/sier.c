@@ -1,34 +1,24 @@
 #include <stdio.h>
-#include <signal.h>
 #include <stdlib.h>
 #include <time.h>
+#include <signal.h>
+
 #include "gfx/gfx.h"
+#include "utils/random.h"
+#include "utils/signal.h"
 
 #define TITLE "Sierpinski"
 #define DEFAULT_WIDTH 800
 #define DEFAULT_HEIGHT 800
-
-volatile int EXIT_REQUESTED = 0;
 
 struct point {
 	int x;
 	int y;
 };
 
-int randint(int max, FILE *generator)
-{
-	return fgetc(generator) % max;
-}
-
 void plot_point(struct point *p)
 {
 	gfx_point(p->x, p->y);
-}
-
-void handle_sigint(int sig)
-{
-	EXIT_REQUESTED = 1;
-	fprintf(stderr, "\nExiting...\n");
 }
 
 void paint_fractal(x1, y1, x2, y2, x3, y3)
@@ -58,7 +48,7 @@ void paint_fractal(x1, y1, x2, y2, x3, y3)
 	px = vertex->x;
 	py = vertex->y;
 
-	signal(SIGINT, handle_sigint);
+	signal(SIGINT, signal_exit);
 
 	while(!EXIT_REQUESTED) {
 		vertex = triangle[randint(3, fp)];

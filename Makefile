@@ -2,7 +2,7 @@ all: sier may
 
 CC = gcc
 CFLAGS= -Wall -Wformat -lX11 -lm
-SOURCES = lib/gfx/gfx.c
+SOURCES = $(wildcard lib/*/*.c)
 INCLUDE = lib
 
 build: $(DEPS)
